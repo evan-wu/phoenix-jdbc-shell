@@ -16,5 +16,5 @@ Phoenix sqlline shell depends hbase configuration - hbase-site.xml, what's diffe
 # Usage
 * mvn clean install
 * edit config.properties
-* command mode: java -jar phoenix-shell-1.0-SNAPSHOT.jar <SQL statement>
+* command mode: java -jar phoenix-shell-1.0-SNAPSHOT.jar [SQL statement]
 * interactive mode: java -jar phoenix-shell-1.0-SNAPSHOT.jar
