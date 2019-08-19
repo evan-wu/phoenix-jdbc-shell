@@ -155,8 +155,8 @@ public class PhoenixShellMain {
             Object[] result = printResultSet(rs, ignoreAllNullColumn);
             System.out.println(result[0]);
             logger.info("\n\r" + (String)result[0]);
-            System.out.println(result[1] + " rows executed in (" + (System.currentTimeMillis() - start) + " milliseconds)");
-            logger.info(result[1] + " rows executed in (" + (System.currentTimeMillis() - start) + " milliseconds)");
+            System.out.println(result[1] + " rows queried in (" + (System.currentTimeMillis() - start) + " milliseconds)");
+            logger.info(result[1] + " rows queried in (" + (System.currentTimeMillis() - start) + " milliseconds)");
         } else {
             int updateCount = statement.executeUpdate(sql);
             connection.commit();
@@ -171,7 +171,7 @@ public class PhoenixShellMain {
         while (rs.next()) {
             Map<Integer, Object> row = new HashMap<>();
             for (int i = 1; i <= colCount; i++) {
-                row.put(i, rs.getString(i));
+                row.put(i, rs.getObject(i));
             }
             result.add(row);
         }
@@ -180,7 +180,7 @@ public class PhoenixShellMain {
     /**
      *
      * @param rs ResultSet
-     * @param skipNullColumn 输出字符时跳过在所有行都为null的列
+     * @param skipNullColumn 输出时忽略在所有行都为null的列
      * @return
      * @throws SQLException
      */
@@ -221,7 +221,7 @@ public class PhoenixShellMain {
             for (Map<Integer, Object> row : list ) {
                 sb.append(horizontalLine);
                 for (int i = 0; i < nonNullColIndex.size(); i++) {
-                    sb.append(String.format("| %" + colWidths.get(i) + "s ", row.get(nonNullColIndex.get(i)).toString()));
+                    sb.append(String.format("| %" + colWidths.get(i) + "s ", row.get(nonNullColIndex.get(i))));
                 }
                 sb.append("|\n");
             }
